@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        /* background-image: url(https://wallpaperaccess.com/full/2078959.jpg); */
+        background-image: url(https://cdn2.vectorstock.com/i/1000x1000/90/61/tic-tac-toe-xo-game-seamless-pattern-black-board-vector-6779061.jpg);
+        /* background-repeat: no-repeat; */
+        /* background-size: 100% 160%; */
+        font-family: sans-serif;
+        text-align: center;
+    }
+
+    .box{
+        text-align: center;
+        background-color: rgba(49, 49, 49, 0.76);
+        border-radius: 15px;
+        color: blanchedalmond;
+        width: 19em;
+        height: 19em;
+        margin: 5em auto;
+        padding: 8px;
+        border: 2px solid rgba(255, 255, 255, 0.301);
+        box-shadow: 1px 1px 25px rgb(19, 18, 18);
+    }
+    h1,h4{
+        color: rgba(245, 245, 245, 0.945);
+        background-color: rgba(44, 43, 43, 0.788);
+        box-shadow: 1px 1px 15px rgba(85, 81, 81, 0.226);
+        text-shadow: 1px 1px 15px rgba(233, 229, 229, 0.877);
+    }
+    h2,h3{
+        display: none;
+    }
+    h2{
+        color: rgba(253, 249, 255, 0.945) ;
+        text-shadow: 1px 1px 15px rgba(7, 7, 7, 0.767) ;
+    }
+    button{
+        font-size: 3em;
+        width: 2em;
+        background-color: rgba(253, 249, 255, 0.945);
+        height: 2em;
+        border-radius: 15px;
+        border: 2px solid rgba(48, 46, 46, 0.425);
+    }
+    input{
+        border: 2px solid rgba(48, 46, 46, 0.425);
+        background-color: rgba(253, 249, 255, 0.945);
+        font-size: 3em;
+        display: block;
+        margin: 1em auto;
+        border-radius: 15px;
+    }
+    
+
+</style>
+<body>
+    <h1>***Welcome to The Tic Tac Toe Game***</h1>
+    <h4>Note:- If you have chosen X then second player will be O or Vice Versa. Incase you haven't Chosen the option so the first player will be given O and X to second player</h4>
+    <div class="box">
+        <h2 id="x">Cross(X) won</h2>
+        <h2 id="o">Circle(O) won</h2>
+        <h3 id="more"> Do you want to play more&quest; 
+        <input id="input"  type="button" value="Yes">
+        </h3>
+        <table id="gamebox">
+            <tr>
+                <td><button id="1"></button></td>
+                <td><button id="2"></button></td>
+                <td><button id="3"></button></td>
+            </tr>
+            <tr>
+                <td><button id="4"></button></td>
+                <td><button id="5"></button></td>
+                <td><button id="6"></button></td>
+            </tr>
+            <tr>
+                <td><button id="7"></button></td>
+                <td><button id="8"></button></td>
+                <td><button id="9"></button></td>
+            </tr>
+        </table>
+        
+    </div>
+    <script>
+         
+        var audio = new Audio("https://mail.google.com/mail/u/0?ui=2&ik=b0f2986248&attid=0.1&permmsgid=msg-a:r-194161652018060605&th=1796ffcfd2c2e01a&view=att&disp=safe&realattid=f_kopq2quv0");
+        var audio2 = new Audio("https://mail.google.com/mail/u/0?ui=2&ik=b0f2986248&attid=0.1&permmsgid=msg-a:r-1589953136418882385&th=179700345fe2d04b&view=att&disp=safe&realattid=f_kopqblyv0");
+    
+        // var audio = new Audio("https://bublup-media-production.s3.amazonaws.com/27009c91-e783-4eab-beee-0dc4f8e14d24/file_uploads/80d9565f.mp3?response-content-disposition=inline%3B%20filename%3D%22Wood%20Plank%20Flicks.mp3%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6J6ZXRI3GJ2OJTXR%2F20210525%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210525T114447Z&X-Amz-Expires=7200&X-Amz-SignedHeaders=host&X-Amz-Signature=8b11bc7cffdd21a2f3caad4748049c922a716ecd3dfeba33cfccdcaa7442f6c3");
+        // var audio2 = new Audio("https://bublup-media-production.s3.amazonaws.com/91efa3ea-3530-43d2-a1c2-522ff37c46fe/file_uploads/67180179.mp3?response-content-disposition=inline%3B%20filename%3D%22Loping%20Sting%20-%20Kevin%20MacLeod.mp3%22&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA6J6ZXRI3GJ2OJTXR%2F20210525%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20210525T114346Z&X-Amz-Expires=7200&X-Amz-SignedHeaders=host&X-Amz-Signature=0aac79d88e6c23894be95c0c918f0bb363810c84b6f7bd374d624a7d80cfd6f3");
+    
+
+        let buttons = document.querySelectorAll("button");
+        value = prompt("Its a Tic Tac Toe game so, As a first player enter your choice from Alphabets X or O?" ).toUpperCase();
+        for (item of buttons) {
+            item.addEventListener("click", function run(e){
+            if (e.target.innerText == ""){
+                if ( value == "X"){     
+
+                    audio.play();
+                    e.target.innerText= "X";
+                    value = "O";
+                    }
+                else{
+                    audio.play();
+                    e.target.innerText ="O";
+                    value = "X";
+                }
+            }
+            if ((document.getElementById("1").innerHTML == "X" && document.getElementById("2").innerHTML == "X" && document.getElementById("3").innerHTML =="X") ||  (document.getElementById("4").innerHTML == "X" && document.getElementById("5").innerHTML == "X" && document.getElementById("6").innerHTML == "X") ||  (document.getElementById("7").innerHTML == "X" && document.getElementById("8").innerHTML == "X" && document.getElementById("9").innerHTML == "X") ||  (document.getElementById("1").innerHTML == "X" && document.getElementById("4").innerHTML == "X" && document.getElementById("7").innerHTML == "X") ||  (document.getElementById("2").innerHTML == "X" && document.getElementById("5").innerHTML == "X" && document.getElementById("8").innerHTML == "X") ||  (document.getElementById("3").innerHTML == "X" && document.getElementById("6").innerHTML == "X" && document.getElementById("9").innerHTML == "X") ||  (document.getElementById("1").innerHTML == "X" && document.getElementById("5").innerHTML == "X" && document.getElementById("9").innerHTML == "X") ||  (document.getElementById("3").innerHTML == "X" && document.getElementById("5").innerHTML == "X" && document.getElementById("7").innerHTML == "X")){
+                setTimeout(() => {
+                    document.getElementById("gamebox").style.display ="none"; 
+                    document.getElementById("x").style.display = "block";
+                    document.getElementById("more").style.display = "block";
+                    audio2.play();
+                }, 250);
+                
+                
+            }
+            else if ((document.getElementById("1").innerHTML == "O" && document.getElementById("2").innerHTML == "O" && document.getElementById("3").innerHTML =="O") ||  (document.getElementById("4").innerHTML == "O" && document.getElementById("5").innerHTML == "O" && document.getElementById("6").innerHTML == "O") ||  (document.getElementById("7").innerHTML == "O" && document.getElementById("8").innerHTML == "O" && document.getElementById("9").innerHTML == "O") ||  (document.getElementById("1").innerHTML == "O" && document.getElementById("4").innerHTML == "O" && document.getElementById("7").innerHTML == "O") ||  (document.getElementById("2").innerHTML == "O" && document.getElementById("5").innerHTML == "O" && document.getElementById("8").innerHTML == "O") ||  (document.getElementById("3").innerHTML == "O" && document.getElementById("6").innerHTML == "O" && document.getElementById("9").innerHTML == "O") ||  (document.getElementById("1").innerHTML == "O" && document.getElementById("5").innerHTML == "O" && document.getElementById("9").innerHTML == "O") ||  (document.getElementById("3").innerHTML == "O" && document.getElementById("5").innerHTML == "O" && document.getElementById("7").innerHTML == "O")){
+                setTimeout(() => {
+                    document.getElementById("gamebox").style.display ="none"; 
+                    document.getElementById("o").style.display = "block";
+                    document.getElementById("more").style.display = "block";
+                    audio2.play();
+
+                }, 250);
+            }
+            else if ((document.getElementById("1").innerHTML == "O" || document.getElementById("1").innerHTML == "X") && (document.getElementById("2").innerHTML == "O" || document.getElementById("2").innerHTML == "X") && (document.getElementById("3").innerHTML == "O" || document.getElementById("3").innerHTML == "X") && (document.getElementById("4").innerHTML == "O" || document.getElementById("4").innerHTML == "X") && (document.getElementById("5").innerHTML == "O" || document.getElementById("5").innerHTML == "X") && (document.getElementById("6").innerHTML == "O" || document.getElementById("6").innerHTML == "X") && (document.getElementById("7").innerHTML == "O" || document.getElementById("7").innerHTML == "X") && (document.getElementById("8").innerHTML == "O" || document.getElementById("8").innerHTML == "X") && (document.getElementById("9").innerHTML == "O" || document.getElementById("9").innerHTML == "X")){
+                alert("No one won");
+                location.reload();
+            }
+            });
+
+
+            let input = document.getElementById("input");
+            input.addEventListener("click", function run(){
+                location.reload();
+            });
+    
+        }
+
+    </script>
+</body>
+</html>
